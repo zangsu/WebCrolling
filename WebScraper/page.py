@@ -29,5 +29,9 @@ def find_page():
     return max_page
 
 def extract_notice(last_page):
+    notice = []
     for page in range(last_page):
-        
+        result = requests.get(f"{URL}&page={page+1}")
+        print(result)
+
+    return notice
