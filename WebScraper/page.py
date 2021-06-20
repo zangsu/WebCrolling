@@ -3,7 +3,7 @@
 import requests
 from bs4 import BeautifulSoup
 URL = "https://cafe.naver.com/ArticleList.nhn?search.clubid=27877258&search.menuid=109&search.boardtype=L&search.totalCount=134&search.page=1"
-
+#URL은 나중에 적당한 걸로 바꾸기(현재 네이버 카페는 로그인 안하면 들어가기 힘든듯함)
 def find_page():
 
     result = requests.get(URL)
