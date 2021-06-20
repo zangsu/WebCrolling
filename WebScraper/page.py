@@ -29,9 +29,39 @@ def find_page():
     return max_page
 
 def extract_notice(last_page):
+    sURL = URL[:-6]
     notice = []
-    for page in range(last_page):
-        result = requests.get(f"{URL}&page={page+1}")
-        print(result)
 
+    # for page in range(last_page):
+    #     result = requests.get(f"{sURL}&page={page+1}")
+    result = requests.get(URL)
+    soup = BeautifulSoup(result.text, "html.parser")
+    #table = soup.find_all("tr")
+    table = soup.find_all("a",class_="article")
+    for element in table:
+        #head = element.find("a",class_="article")
+        head = [element.text]
+
+        head[0] = head[0].replace("\n", "")
+        head[0] = head[0].replace("\t", "")
+
+        top1 = 0
+        tail = len(head[0])
+        i = 0
+        while(head[0][i] == ' '):
+            top1 = top1+1
+            i+=1
+        while(head[0][i] != ' '):
+            i+=1
+        i = len(head[0])
+        while(head[0][i-1] == " "):
+            tail = tail-1
+            i-=1
+        head[0] = head[0][top1:tail]
+
+        notice.append(head)
+
+        # name = element.find("a", class_="m-tcol-c")
+    print(notice)
+        #notice.append()
     return notice
