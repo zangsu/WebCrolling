@@ -33,12 +33,11 @@ def extract_notice(last_page):
     notice = []
     j=0
     for page in range(last_page):
-        print(f"{sURL}page={page+1}")
         result = requests.get(f"{sURL}page={page+1}")
         soup = BeautifulSoup(result.text, "html.parser")
 
         table = soup.find_all("a",class_="article")
-        for element in table:
+        for element in table: #함수로 따로 정의하는 것은 #2.8
             head = [element.text]
 
             head[0] = head[0].replace("\n", "")
@@ -51,5 +50,5 @@ def extract_notice(last_page):
             notice[j].append(element.string)
             j+= 1
 
-    print(notice)
+    #print(notice)
     return notice
