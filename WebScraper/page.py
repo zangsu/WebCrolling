@@ -49,6 +49,13 @@ def extract_notice(last_page):
         for element in name:
             notice[j].append(element.string)
             j+= 1
-
+    j=0
+    for page in range(last_page):
+        result = requests.get(f"{sURL}page={page+1}")
+        soup = BeautifulSoup(result.text, "html.parser")  
+        date = soup.find_all("td", class_="td_date")
+        for element in date:
+            notice[j].append(element.string)
+            j+=1
     #print(notice)
     return notice
